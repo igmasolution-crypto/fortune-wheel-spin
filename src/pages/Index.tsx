@@ -3,6 +3,7 @@ import FortuneWheel from "@/components/FortuneWheel";
 import PrizeModal from "@/components/PrizeModal";
 import bgDesktop from "@/assets/bg.jpg";
 import bgMob from "@/assets/bg-mob.jpg";
+import tiger1 from "@/assets/tiger1.png";
 import tiger2 from "@/assets/tiger2.png";
 import coins from "@/assets/coins.png";
 
@@ -35,16 +36,40 @@ const Index = () => {
           </h1>
         </div>
 
-        {/* Wheel */}
+        {/* Wheel area with tigers */}
         <div className="relative mb-2">
-          <FortuneWheel onResult={(p) => setPrize(p)} />
+          {/* Tiger 2 - behind/hugging the wheel (z-[2]) */}
+          <img
+            src={tiger2}
+            alt="Fortune Tiger"
+            className="absolute -left-[25%] bottom-[5%] w-[55%] z-[2] pointer-events-none drop-shadow-xl animate-tiger-hug"
+            style={{ transform: "scaleX(-1)" }}
+            loading="lazy"
+            width={512}
+            height={512}
+          />
+
+          {/* Wheel (z-[3] internally managed) */}
+          <div className="relative z-[3]">
+            <FortuneWheel onResult={(p) => setPrize(p)} />
+          </div>
+
+          {/* Tiger 1 - in front of wheel (z-[35]) */}
+          <img
+            src={tiger1}
+            alt="Fortune Tiger"
+            className="absolute -right-[15%] -bottom-[10%] w-[50%] z-[35] pointer-events-none drop-shadow-2xl animate-tiger-bounce"
+            loading="lazy"
+            width={512}
+            height={512}
+          />
         </div>
 
-        {/* Coins decorative */}
+        {/* Coins decorative - various positions with animations */}
         <img
           src={coins}
           alt=""
-          className="absolute left-[-30px] bottom-[30%] w-24 sm:w-32 opacity-80 animate-float-coin pointer-events-none z-[5]"
+          className="absolute left-[2%] top-[15%] w-28 sm:w-36 opacity-90 animate-coin-float-1 pointer-events-none z-[40]"
           loading="lazy"
           width={512}
           height={512}
@@ -52,17 +77,23 @@ const Index = () => {
         <img
           src={coins}
           alt=""
-          className="absolute right-[-20px] bottom-[35%] w-20 sm:w-28 opacity-70 animate-float-coin-2 pointer-events-none z-[5] -scale-x-100"
+          className="absolute right-[2%] top-[10%] w-24 sm:w-32 opacity-80 animate-coin-float-2 pointer-events-none z-[40] -scale-x-100"
           loading="lazy"
           width={512}
           height={512}
         />
-
-        {/* Tiger */}
         <img
-          src={tiger2}
-          alt="Fortune Tiger"
-          className="w-40 sm:w-56 mt-[-20px] drop-shadow-2xl z-[6] pointer-events-none"
+          src={coins}
+          alt=""
+          className="absolute left-[5%] bottom-[5%] w-20 sm:w-28 opacity-75 animate-coin-float-3 pointer-events-none z-[40]"
+          loading="lazy"
+          width={512}
+          height={512}
+        />
+        <img
+          src={coins}
+          alt=""
+          className="absolute right-[5%] bottom-[10%] w-22 sm:w-30 opacity-85 animate-coin-float-4 pointer-events-none z-[4]"
           loading="lazy"
           width={512}
           height={512}
