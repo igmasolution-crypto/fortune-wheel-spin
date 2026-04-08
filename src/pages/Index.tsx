@@ -26,7 +26,7 @@ const Index = () => {
       <div className="absolute inset-0 bg-casino-dark/40 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-4 pb-0">
+      <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-4 pb-4">
         {/* Banner */}
         <div className="w-full text-center mb-4 sm:mb-6">
           <h1 className="font-display text-2xl sm:text-4xl md:text-5xl drop-shadow-lg tracking-widest leading-tight">
