@@ -53,7 +53,10 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
   }, [spinning, rotation, onResult]);
 
   return (
-    <div className="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] md:w-[440px] md:h-[440px]">
+    <div
+      className="relative mx-auto"
+      style={{ width: "80vw", maxWidth: "400px", aspectRatio: "1/1" }}
+    >
       {/* Glow effect */}
       <div
         className={`absolute inset-[-20px] rounded-full bg-casino-glow/20 blur-2xl transition-opacity duration-500 ${
@@ -61,26 +64,28 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         }`}
       />
 
-      {/* Subwheel border (fixed) - z-10 */}
-      <img
-        src={subwheel}
-        alt=""
-        className="absolute inset-0 w-full h-full z-10 pointer-events-none"
-        draggable={false}
-      />
-
-      {/* Spinning wheel with prizes - z-5 */}
+      {/* Spinning wheel with prizes - BOTTOM LAYER of wheel stack */}
       <img
         ref={wheelRef}
         src={wheelBr}
         alt="Roleta de prêmios"
-        className={`absolute inset-[6%] w-[88%] h-[88%] z-[5] ${
-          !spinning ? "animate-idle-wobble" : ""
-        } ${bouncing ? "animate-bounce-stop" : ""}`}
+        className={`absolute inset-[5%] w-[90%] h-[90%] z-[5] object-contain ${bouncing ? "animate-bounce-stop" : ""}`}
         style={{
-          transform: `rotate(${rotation}deg)`,
-          transition: spinning ? "transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99)" : "none",
+          transform: spinning
+            ? `rotate(${rotation}deg)`
+            : `rotate(${rotation}deg)`,
+          transition: spinning
+            ? "transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99)"
+            : "none",
         }}
+        draggable={false}
+      />
+
+      {/* Subwheel border (fixed) - ON TOP of spinning wheel */}
+      <img
+        src={subwheel}
+        alt=""
+        className="absolute inset-0 w-full h-full z-10 pointer-events-none object-contain"
         draggable={false}
       />
 
@@ -98,7 +103,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
           <img
             src={wheelCenter}
             alt="Girar"
-            className="w-full h-full"
+            className="w-full h-full object-contain"
             draggable={false}
           />
           <img
@@ -114,7 +119,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
       <img
         src={pointer}
         alt=""
-        className="absolute top-[-8%] left-1/2 -translate-x-1/2 w-[12%] z-30 pointer-events-none drop-shadow-lg"
+        className="absolute top-[-8%] left-1/2 -translate-x-1/2 w-[12%] z-30 pointer-events-none drop-shadow-lg object-contain"
         draggable={false}
       />
     </div>
