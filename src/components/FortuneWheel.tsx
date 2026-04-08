@@ -3,6 +3,7 @@ import wheelBr from "@/assets/wheel-br.png";
 import subwheel from "@/assets/subwheel.png";
 import wheelCenter from "@/assets/wheel-center.png";
 import pointer from "@/assets/pointer.png";
+import iconRefresh from "@/assets/icon-refresh.svg";
 
 const PRIZES = [
   "BÔNUS R$ 15.000",
@@ -34,18 +35,13 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
     setSpinning(true);
     setBouncing(false);
 
-    // Pick a random prize index (weighted toward good prizes)
     const prizeIndex = Math.floor(Math.random() * PRIZES.length);
-
-    // Calculate final rotation
-    const fullRotations = 5 + Math.floor(Math.random() * 4); // 5-8 full rotations
-    // The pointer is at the top (0deg). We need to align the prize slice center to top.
+    const fullRotations = 5 + Math.floor(Math.random() * 4);
     const prizeAngle = prizeIndex * SLICE_ANGLE + SLICE_ANGLE / 2;
     const finalRotation = rotation + fullRotations * 360 + (360 - prizeAngle);
 
     setRotation(finalRotation);
 
-    // Wait for spin to finish
     setTimeout(() => {
       setBouncing(true);
       setTimeout(() => {
@@ -65,7 +61,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         }`}
       />
 
-      {/* Subwheel border (fixed) */}
+      {/* Subwheel border (fixed) - z-10 */}
       <img
         src={subwheel}
         alt=""
@@ -73,7 +69,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         draggable={false}
       />
 
-      {/* Spinning wheel */}
+      {/* Spinning wheel with prizes - z-5 */}
       <img
         ref={wheelRef}
         src={wheelBr}
@@ -88,7 +84,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         draggable={false}
       />
 
-      {/* Center button (fixed) */}
+      {/* Center button with refresh icon (fixed) - z-20 */}
       <button
         onClick={spin}
         disabled={spinning}
@@ -98,19 +94,27 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         style={{ transform: "translate(-50%, -50%)" }}
         aria-label="Girar roleta"
       >
-        <img
-          src={wheelCenter}
-          alt="Girar"
-          className="w-full h-full"
-          draggable={false}
-        />
+        <div className="relative w-full h-full">
+          <img
+            src={wheelCenter}
+            alt="Girar"
+            className="w-full h-full"
+            draggable={false}
+          />
+          <img
+            src={iconRefresh}
+            alt=""
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45%] h-[45%] pointer-events-none"
+            draggable={false}
+          />
+        </div>
       </button>
 
-      {/* Pointer (fixed, at top) */}
+      {/* Pointer (fixed, at top) - z-30 */}
       <img
         src={pointer}
         alt=""
-        className="absolute top-[-8%] left-1/2 -translate-x-1/2 w-[15%] z-30 pointer-events-none drop-shadow-lg"
+        className="absolute top-[-8%] left-1/2 -translate-x-1/2 w-[12%] z-30 pointer-events-none drop-shadow-lg"
         draggable={false}
       />
     </div>
