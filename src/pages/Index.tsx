@@ -11,7 +11,7 @@ const Index = () => {
   const [prize, setPrize] = useState<string | null>(null);
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col items-center">
+    <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-end">
       {/* Background */}
       <img
         src={bgDesktop}
