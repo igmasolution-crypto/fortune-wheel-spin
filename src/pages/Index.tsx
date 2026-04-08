@@ -31,7 +31,7 @@ const Index = () => {
         <div className="w-full text-center mb-6">
           <h1 className="font-display text-3xl sm:text-5xl drop-shadow-lg tracking-widest leading-tight">
             <span className="text-white">INSCREVA-SE, JOGUE,</span>{" "}
-            <span className="text-secondary">GANHE!</span>
+            <span className="text-white">GANHE!</span>
           </h1>
         </div>
 
