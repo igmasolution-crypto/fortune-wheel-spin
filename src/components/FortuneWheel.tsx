@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback } from "react";
 import wheelBr from "@/assets/wheel-br.png";
 import subwheel from "@/assets/subwheel.png";
 import wheelCenter from "@/assets/wheel-center.png";
@@ -19,8 +19,9 @@ const PRIZES = [
 ];
 
 const SLICE_ANGLE = 360 / PRIZES.length;
-// Offset to calibrate slice 0 position on the wheel image (degrees clockwise from top)
 const WHEEL_OFFSET = 0;
+
+const normalizeAngle = (angle: number) => ((angle % 360) + 360) % 360;
 
 interface FortuneWheelProps {
   onResult: (prize: string) => void;
@@ -29,28 +30,24 @@ interface FortuneWheelProps {
 const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
   const [spinning, setSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
-  const [bouncing, setBouncing] = useState(false);
-  const wheelRef = useRef<HTMLImageElement>(null);
 
   const spin = useCallback(() => {
     if (spinning) return;
     setSpinning(true);
-    setBouncing(false);
 
     const prizeIndex = Math.floor(Math.random() * PRIZES.length);
     const fullRotations = 5 + Math.floor(Math.random() * 4);
     const prizeAngle = prizeIndex * SLICE_ANGLE + SLICE_ANGLE / 2;
-    const finalRotation = rotation + fullRotations * 360 + (360 - prizeAngle - WHEEL_OFFSET);
+    const targetRotation = normalizeAngle(360 - prizeAngle - WHEEL_OFFSET);
+    const currentRotation = normalizeAngle(rotation);
+    const additionalRotation = normalizeAngle(targetRotation - currentRotation);
+    const finalRotation = rotation + fullRotations * 360 + additionalRotation;
 
     setRotation(finalRotation);
 
     setTimeout(() => {
-      setBouncing(true);
-      setTimeout(() => {
-        setBouncing(false);
-        setSpinning(false);
-        onResult(PRIZES[prizeIndex]);
-      }, 500);
+      setSpinning(false);
+      onResult(PRIZES[prizeIndex]);
     }, 4500);
   }, [spinning, rotation, onResult]);
 
@@ -59,14 +56,12 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
       className="relative mx-auto"
       style={{ width: "80vw", maxWidth: "400px", aspectRatio: "1/1" }}
     >
-      {/* Glow effect */}
       <div
         className={`absolute inset-[-20px] rounded-full bg-casino-glow/20 blur-2xl transition-opacity duration-500 ${
           spinning ? "opacity-100 animate-glow-spin" : "opacity-60 animate-glow-pulse"
         }`}
       />
 
-      {/* Subwheel border (fixed) - BEHIND spinning wheel */}
       <img
         src={subwheel}
         alt=""
@@ -74,9 +69,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         draggable={false}
       />
 
-      {/* Spinning wheel with prizes - ON TOP of subwheel */}
       <img
-        ref={wheelRef}
         src={wheelBr}
         alt="Roleta de prêmios"
         className="absolute inset-[2%] w-[96%] h-[96%] z-[10] object-contain"
@@ -89,7 +82,6 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         draggable={false}
       />
 
-      {/* Center button with refresh icon (fixed) - z-20 */}
       <button
         onClick={spin}
         disabled={spinning}
@@ -115,7 +107,6 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         </div>
       </button>
 
-      {/* Pointer (fixed, at top) - z-30 */}
       <img
         src={pointer}
         alt=""
