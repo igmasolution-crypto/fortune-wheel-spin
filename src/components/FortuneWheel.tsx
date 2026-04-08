@@ -6,16 +6,16 @@ import pointer from "@/assets/pointer.png";
 import iconRefresh from "@/assets/icon-refresh.svg";
 
 const PRIZES = [
-  "BÔNUS R$ 15.000",
-  "50 RODADAS GRÁTIS",
-  "Pin-Up Casino",
-  "TENTE NOVAMENTE",
-  "250 RODADAS GRÁTIS",
-  "BÔNUS R$ 30.000",
-  "Pin-Up Casino",
-  "TENTE NOVAMENTE",
-  "BÔNUS R$ 1.500",
-  "100 RODADAS GRÁTIS",
+  "10x",
+  "50x",
+  "2x",
+  "100x",
+  "3x",
+  "100x",
+  "4x",
+  "8x",
+  "25x",
+  "25x",
 ];
 
 const SLICE_ANGLE = 360 / PRIZES.length;
