@@ -30,10 +30,11 @@ const Index = () => {
       <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-4 pb-4">
         {/* Banner */}
         <div className="w-full text-center mb-4 sm:mb-6">
-          <h1 className="font-display text-2xl sm:text-4xl md:text-5xl drop-shadow-lg tracking-widest leading-tight">
-            <span className="text-white">INSCREVA-SE, JOGUE,</span>{" "}
-            <span className="text-white">GANHE!</span>
-          </h1>
+          <img
+            src={banner}
+            alt="Inscreva-se, Jogue e Ganhe!"
+            className="w-[90%] max-w-[500px] mx-auto drop-shadow-lg object-contain"
+          />
         </div>
 
         {/* Wheel area with tigers */}
