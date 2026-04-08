@@ -64,28 +64,26 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         }`}
       />
 
-      {/* Spinning wheel with prizes - BOTTOM LAYER of wheel stack */}
+      {/* Subwheel border (fixed) - BEHIND spinning wheel */}
+      <img
+        src={subwheel}
+        alt=""
+        className="absolute inset-0 w-full h-full z-[5] pointer-events-none object-contain"
+        draggable={false}
+      />
+
+      {/* Spinning wheel with prizes - ON TOP of subwheel */}
       <img
         ref={wheelRef}
         src={wheelBr}
         alt="Roleta de prêmios"
-        className={`absolute inset-[5%] w-[90%] h-[90%] z-[5] object-contain ${bouncing ? "animate-bounce-stop" : ""}`}
+        className={`absolute inset-[5%] w-[90%] h-[90%] z-[10] object-contain ${bouncing ? "animate-bounce-stop" : ""}`}
         style={{
-          transform: spinning
-            ? `rotate(${rotation}deg)`
-            : `rotate(${rotation}deg)`,
+          transform: `rotate(${rotation}deg)`,
           transition: spinning
             ? "transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99)"
             : "none",
         }}
-        draggable={false}
-      />
-
-      {/* Subwheel border (fixed) - ON TOP of spinning wheel */}
-      <img
-        src={subwheel}
-        alt=""
-        className="absolute inset-0 w-full h-full z-10 pointer-events-none object-contain"
         draggable={false}
       />
 
