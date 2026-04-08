@@ -79,7 +79,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
         ref={wheelRef}
         src={wheelBr}
         alt="Roleta de prêmios"
-        className={`absolute inset-[2%] w-[96%] h-[96%] z-[10] object-contain ${bouncing ? "animate-bounce-stop" : ""}`}
+        className="absolute inset-[2%] w-[96%] h-[96%] z-[10] object-contain"
         style={{
           transform: `rotate(${rotation}deg)`,
           transition: spinning
