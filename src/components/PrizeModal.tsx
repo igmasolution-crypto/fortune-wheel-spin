@@ -37,7 +37,7 @@ const PrizeModal = ({ prize, onClose }: PrizeModalProps) => {
           </p>
 
           <a
-            href="https://seulink.com"
+            href="https://go.aff.esportiva.bet/mybn9y10"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block w-full py-4 px-8 rounded-xl font-display text-2xl tracking-wider bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-105 transition-all duration-300"

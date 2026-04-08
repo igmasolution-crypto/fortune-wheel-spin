@@ -19,6 +19,8 @@ const PRIZES = [
 ];
 
 const SLICE_ANGLE = 360 / PRIZES.length;
+// Offset to calibrate slice 0 position on the wheel image (degrees clockwise from top)
+const WHEEL_OFFSET = 0;
 
 interface FortuneWheelProps {
   onResult: (prize: string) => void;
@@ -38,7 +40,7 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
     const prizeIndex = Math.floor(Math.random() * PRIZES.length);
     const fullRotations = 5 + Math.floor(Math.random() * 4);
     const prizeAngle = prizeIndex * SLICE_ANGLE + SLICE_ANGLE / 2;
-    const finalRotation = rotation + fullRotations * 360 + (360 - prizeAngle);
+    const finalRotation = rotation + fullRotations * 360 + (360 - prizeAngle - WHEEL_OFFSET);
 
     setRotation(finalRotation);
 
