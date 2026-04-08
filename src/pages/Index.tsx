@@ -29,11 +29,11 @@ const Index = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-4 pb-4">
         {/* Banner */}
-        <div className="w-full text-center mb-4 sm:mb-6">
+        <div className="w-full text-center mb-0">
           <img
             src={banner}
             alt="Inscreva-se, Jogue e Ganhe!"
-            className="w-[90%] max-w-[500px] mx-auto drop-shadow-lg object-contain"
+            className="w-full max-w-[600px] mx-auto drop-shadow-lg object-contain"
           />
         </div>
 
