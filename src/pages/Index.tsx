@@ -11,7 +11,7 @@ const Index = () => {
   const [prize, setPrize] = useState<string | null>(null);
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-end">
+    <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center">
       {/* Background */}
       <img
         src={bgDesktop}
@@ -41,7 +41,7 @@ const Index = () => {
           <img
             src={tiger2}
             alt="Fortune Tiger"
-            className="absolute -left-[20%] sm:-left-[25%] bottom-[5%] w-[45%] sm:w-[55%] z-[2] pointer-events-none drop-shadow-xl animate-tiger-hug"
+            className="absolute -left-[20%] sm:-left-[25%] -bottom-[8%] sm:-bottom-[10%] w-[45%] sm:w-[55%] z-[35] pointer-events-none drop-shadow-xl animate-tiger-hug"
             style={{ transform: "scaleX(-1)" }}
             loading="lazy"
           />
