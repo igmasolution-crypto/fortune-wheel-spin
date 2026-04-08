@@ -26,15 +26,6 @@ const Index = () => {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-4 pb-0">
-        {/* Header */}
-        <div className="flex items-center justify-between w-full mb-4">
-          <span className="font-display text-2xl sm:text-3xl text-primary tracking-wider">
-            SEU LOGO
-          </span>
-          <span className="font-display text-xl sm:text-2xl text-secondary tracking-wider">
-            FORTUNE TIGER
-          </span>
-        </div>
 
         {/* Banner */}
         <div className="w-full text-center mb-6">
