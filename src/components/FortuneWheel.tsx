@@ -19,7 +19,7 @@ const PRIZES = [
 ];
 
 const SLICE_ANGLE = 360 / PRIZES.length;
-const WHEEL_OFFSET = 0;
+const WHEEL_OFFSET = SLICE_ANGLE / 2;
 
 const normalizeAngle = (angle: number) => ((angle % 360) + 360) % 360;
 
