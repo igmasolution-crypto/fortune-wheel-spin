@@ -20,8 +20,16 @@ const PRIZES = [
 
 const SLICE_ANGLE = 360 / PRIZES.length;
 const WHEEL_OFFSET = SLICE_ANGLE / 2;
+const SPIN_DURATION_MS = 4500;
 
 const normalizeAngle = (angle: number) => ((angle % 360) + 360) % 360;
+
+const getPrizeIndexFromRotation = (angle: number) => {
+  const normalizedRotation = normalizeAngle(angle);
+  const pointerAngle = normalizeAngle(360 - normalizedRotation - WHEEL_OFFSET);
+
+  return Math.floor(pointerAngle / SLICE_ANGLE) % PRIZES.length;
+};
 
 interface FortuneWheelProps {
   onResult: (prize: string) => void;
@@ -42,13 +50,14 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
     const currentRotation = normalizeAngle(rotation);
     const additionalRotation = normalizeAngle(targetRotation - currentRotation);
     const finalRotation = rotation + fullRotations * 360 + additionalRotation;
+    const finalPrize = PRIZES[getPrizeIndexFromRotation(finalRotation)];
 
     setRotation(finalRotation);
 
     setTimeout(() => {
       setSpinning(false);
-      onResult(PRIZES[prizeIndex]);
-    }, 4500);
+      onResult(finalPrize);
+    }, SPIN_DURATION_MS);
   }, [spinning, rotation, onResult]);
 
   return (
