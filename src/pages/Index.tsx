@@ -14,7 +14,7 @@ const Index = () => {
   const [prize, setPrize] = useState<string | null>(null);
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center">
+    <div className="relative h-screen overflow-hidden flex flex-col items-center justify-center">
       {/* Background */}
       <img
         src={bgDesktop}
@@ -29,7 +29,7 @@ const Index = () => {
       <div className="absolute inset-0 bg-casino-dark/40 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-4 pb-4 -mt-16 sm:-mt-20">
+      <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-0 pb-0 -mt-28 sm:-mt-20">
         {/* Banner */}
         <div className="w-full text-center -mb-10 relative z-[50]">
           <img
