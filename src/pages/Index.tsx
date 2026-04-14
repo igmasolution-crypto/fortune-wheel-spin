@@ -14,7 +14,7 @@ const Index = () => {
   const [prize, setPrize] = useState<string | null>(null);
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center">
+    <div className="relative h-screen overflow-hidden flex flex-col items-center justify-center">
       {/* Background */}
       <img
         src={bgDesktop}
@@ -29,7 +29,7 @@ const Index = () => {
       <div className="absolute inset-0 bg-casino-dark/40 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-4 pb-4 -mt-16 sm:-mt-20">
+      <div className="relative z-10 flex flex-col items-center w-full max-w-lg mx-auto px-4 pt-0 pb-0 -mt-28 sm:-mt-20">
         {/* Banner */}
         <div className="w-full text-center -mb-10 relative z-[50]">
           <img
@@ -96,7 +96,7 @@ const Index = () => {
       <img
         src={disclaimer}
         alt="A roleta não garante nenhum bônus"
-        className="fixed bottom-[90px] sm:bottom-4 left-2 sm:left-4 w-[200px] sm:w-[400px] z-50 pointer-events-none"
+        className="fixed bottom-[40px] sm:bottom-4 left-2 sm:left-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
         loading="lazy"
       />
 
@@ -104,7 +104,7 @@ const Index = () => {
       <img
         src={disclaimer18}
         alt="Site destinado para maiores de 18 anos"
-        className="fixed bottom-2 sm:bottom-4 right-2 sm:right-4 w-[200px] sm:w-[400px] z-50 pointer-events-none"
+        className="fixed bottom-2 sm:bottom-4 right-2 sm:right-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
         loading="lazy"
       />
 
