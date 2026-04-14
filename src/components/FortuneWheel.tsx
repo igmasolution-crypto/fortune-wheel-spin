@@ -21,8 +21,11 @@ const PRIZES = [
 const SLICE_ANGLE = 360 / PRIZES.length;
 const WHEEL_OFFSET = SLICE_ANGLE / 2;
 const SPIN_DURATION_MS = 4500;
+const PRIZE_ALIGNMENT_OFFSET = 1;
 
 const normalizeAngle = (angle: number) => ((angle % 360) + 360) % 360;
+const normalizeIndex = (index: number) =>
+  ((index % PRIZES.length) + PRIZES.length) % PRIZES.length;
 
 // Create a short tick sound using Web Audio API
 const createTickSound = () => {
@@ -45,8 +48,9 @@ const createTickSound = () => {
 const getPrizeIndexFromRotation = (angle: number) => {
   const normalizedRotation = normalizeAngle(angle);
   const pointerAngle = normalizeAngle(360 - normalizedRotation - WHEEL_OFFSET);
+  const artworkSliceIndex = Math.floor(pointerAngle / SLICE_ANGLE) % PRIZES.length;
 
-  return Math.floor(pointerAngle / SLICE_ANGLE) % PRIZES.length;
+  return normalizeIndex(artworkSliceIndex + PRIZE_ALIGNMENT_OFFSET);
 };
 
 interface FortuneWheelProps {
@@ -102,8 +106,9 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
     setSpinning(true);
 
     const prizeIndex = Math.floor(Math.random() * PRIZES.length);
+    const artworkSliceIndex = normalizeIndex(prizeIndex - PRIZE_ALIGNMENT_OFFSET);
     const fullRotations = 5 + Math.floor(Math.random() * 4);
-    const prizeAngle = prizeIndex * SLICE_ANGLE + SLICE_ANGLE / 2;
+    const prizeAngle = artworkSliceIndex * SLICE_ANGLE + SLICE_ANGLE / 2;
     const targetRotation = normalizeAngle(360 - prizeAngle - WHEEL_OFFSET);
     const currentRotation = normalizeAngle(rotation);
     const additionalRotation = normalizeAngle(targetRotation - currentRotation);
