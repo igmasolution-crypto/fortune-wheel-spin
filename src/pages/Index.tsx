@@ -96,7 +96,7 @@ const Index = () => {
       <img
         src={disclaimer}
         alt="A roleta não garante nenhum bônus"
-        className="absolute bottom-[40px] sm:bottom-4 left-2 sm:left-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
+        className="absolute bottom-[60px] sm:bottom-4 md:bottom-6 left-2 sm:left-4 w-[160px] sm:w-[400px] md:w-[280px] z-50 pointer-events-none"
         loading="lazy"
       />
 
@@ -104,7 +104,7 @@ const Index = () => {
       <img
         src={disclaimer18}
         alt="Site destinado para maiores de 18 anos"
-        className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
+        className="absolute bottom-2 sm:bottom-4 md:bottom-6 right-2 sm:right-4 w-[160px] sm:w-[400px] md:w-[280px] z-50 pointer-events-none"
         loading="lazy"
       />
 
