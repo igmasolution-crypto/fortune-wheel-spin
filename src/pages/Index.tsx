@@ -8,6 +8,7 @@ import tiger2 from "@/assets/tiger2.png";
 import coins from "@/assets/coins.png";
 import banner from "@/assets/banner.png";
 import disclaimer from "@/assets/disclaimer.png";
+import disclaimer18 from "@/assets/disclaimer-18.png";
 
 const Index = () => {
   const [prize, setPrize] = useState<string | null>(null);
