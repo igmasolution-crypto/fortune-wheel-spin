@@ -7,6 +7,7 @@ import tiger1 from "@/assets/tiger1.png";
 import tiger2 from "@/assets/tiger2.png";
 import coins from "@/assets/coins.png";
 import banner from "@/assets/banner.png";
+import disclaimer from "@/assets/disclaimer.png";
 
 const Index = () => {
   const [prize, setPrize] = useState<string | null>(null);
@@ -89,6 +90,14 @@ const Index = () => {
           loading="lazy"
         />
       </div>
+
+      {/* Disclaimer */}
+      <img
+        src={disclaimer}
+        alt="A roleta não garante nenhum bônus"
+        className="fixed bottom-4 left-4 w-[280px] sm:w-[400px] z-50 pointer-events-none"
+        loading="lazy"
+      />
 
       {/* Prize Modal */}
       {prize && (
