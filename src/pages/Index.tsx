@@ -91,6 +91,14 @@ const Index = () => {
         />
       </div>
 
+      {/* Disclaimer */}
+      <img
+        src={disclaimer}
+        alt="A roleta não garante nenhum bônus"
+        className="fixed bottom-4 left-4 w-[280px] sm:w-[400px] z-50 pointer-events-none"
+        loading="lazy"
+      />
+
       {/* Prize Modal */}
       {prize && (
         <PrizeModal prize={prize} onClose={() => setPrize(null)} />
