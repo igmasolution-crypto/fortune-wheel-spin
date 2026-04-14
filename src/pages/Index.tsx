@@ -100,6 +100,14 @@ const Index = () => {
         loading="lazy"
       />
 
+      {/* Disclaimer 18+ */}
+      <img
+        src={disclaimer18}
+        alt="Site destinado para maiores de 18 anos"
+        className="fixed bottom-4 right-4 w-[280px] sm:w-[400px] z-50 pointer-events-none"
+        loading="lazy"
+      />
+
       {/* Prize Modal */}
       {prize && (
         <PrizeModal prize={prize} onClose={() => setPrize(null)} />
