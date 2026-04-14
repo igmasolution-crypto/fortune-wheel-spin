@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import wheelBr from "@/assets/wheel-br.png";
 import subwheel from "@/assets/subwheel.png";
 import wheelCenter from "@/assets/wheel-center.png";
@@ -24,6 +24,24 @@ const SPIN_DURATION_MS = 4500;
 
 const normalizeAngle = (angle: number) => ((angle % 360) + 360) % 360;
 
+// Create a short tick sound using Web Audio API
+const createTickSound = () => {
+  const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  const oscillator = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(3000, audioCtx.currentTime);
+  gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+
+  oscillator.start(audioCtx.currentTime);
+  oscillator.stop(audioCtx.currentTime + 0.05);
+};
+
 const getPrizeIndexFromRotation = (angle: number) => {
   const normalizedRotation = normalizeAngle(angle);
   const pointerAngle = normalizeAngle(360 - normalizedRotation - WHEEL_OFFSET);
@@ -38,6 +56,46 @@ interface FortuneWheelProps {
 const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
   const [spinning, setSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const wheelRef = useRef<HTMLImageElement>(null);
+  const animFrameRef = useRef<number>(0);
+  const lastSliceRef = useRef<number>(-1);
+
+  // Track rotation during spin and play tick on slice crossings
+  useEffect(() => {
+    if (!spinning || !wheelRef.current) return;
+
+    const trackRotation = () => {
+      if (!wheelRef.current) return;
+      const style = getComputedStyle(wheelRef.current);
+      const transform = style.transform;
+
+      if (transform && transform !== "none") {
+        const values = transform.match(/matrix\((.+)\)/);
+        if (values) {
+          const parts = values[1].split(", ");
+          const a = parseFloat(parts[0]);
+          const b = parseFloat(parts[1]);
+          const angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+          const normalized = ((angle % 360) + 360) % 360;
+          const currentSlice = Math.floor(normalized / SLICE_ANGLE);
+
+          if (lastSliceRef.current !== -1 && currentSlice !== lastSliceRef.current) {
+            try { createTickSound(); } catch {}
+          }
+          lastSliceRef.current = currentSlice;
+        }
+      }
+
+      animFrameRef.current = requestAnimationFrame(trackRotation);
+    };
+
+    animFrameRef.current = requestAnimationFrame(trackRotation);
+
+    return () => {
+      cancelAnimationFrame(animFrameRef.current);
+      lastSliceRef.current = -1;
+    };
+  }, [spinning]);
 
   const spin = useCallback(() => {
     if (spinning) return;
@@ -81,7 +139,8 @@ const FortuneWheel = ({ onResult }: FortuneWheelProps) => {
       <img
         src={wheelBr}
         alt="Roleta de prêmios"
-        className="absolute inset-[2%] w-[96%] h-[96%] z-[10] object-contain"
+        ref={wheelRef}
+        className="absolute inset-[2%] w-[96%] h-[96%] z-[10] object-contain will-change-transform"
         style={{
           transform: `rotate(${rotation}deg)`,
           transition: spinning
