@@ -14,7 +14,7 @@ const Index = () => {
   const [prize, setPrize] = useState<string | null>(null);
 
   return (
-    <div className="relative h-screen overflow-hidden flex flex-col items-center justify-center">
+    <div className="relative h-screen overflow-hidden flex flex-col items-center justify-center" style={{ touchAction: "none", overscrollBehavior: "none", position: "fixed", inset: 0 }}>
       {/* Background */}
       <img
         src={bgDesktop}
@@ -96,7 +96,7 @@ const Index = () => {
       <img
         src={disclaimer}
         alt="A roleta não garante nenhum bônus"
-        className="fixed bottom-[40px] sm:bottom-4 left-2 sm:left-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
+        className="absolute bottom-[40px] sm:bottom-4 left-2 sm:left-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
         loading="lazy"
       />
 
@@ -104,7 +104,7 @@ const Index = () => {
       <img
         src={disclaimer18}
         alt="Site destinado para maiores de 18 anos"
-        className="fixed bottom-2 sm:bottom-4 right-2 sm:right-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
+        className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 w-[180px] sm:w-[400px] z-50 pointer-events-none"
         loading="lazy"
       />
 
